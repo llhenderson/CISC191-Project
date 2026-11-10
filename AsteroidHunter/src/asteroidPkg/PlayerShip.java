@@ -15,6 +15,11 @@ public class PlayerShip extends AsteroidHunterShip
 		this.y_position = initYPos;
 	}
 
+	public Player getPlayer()
+	{
+		return this.player;
+	}
+
 	public int getXPos()
 	{
 		return this.x_position;
@@ -33,6 +38,6 @@ public class PlayerShip extends AsteroidHunterShip
 	
 	public void pickupItem(String gameItem)
 	{
-		player.storeItem(gameItem);
+		player.pickupItem(gameItem);
 	}
 }
