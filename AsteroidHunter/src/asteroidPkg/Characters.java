@@ -21,5 +21,5 @@ public abstract class Characters {
         return stats;
     }
 
-   
+    //public void attack(Characters target, )
 }
