@@ -11,5 +11,15 @@ public abstract class Characters {
         this.moveSet = moveSet;
         this.stats = stats;
     }
-    
+    public String getName() {
+        return name;
+    }
+    public String[] getMoveSet() {
+        return moveSet;
+    }
+    public HashMap<String, Integer> getStats() {
+        return stats;
+    }
+
+   
 }
