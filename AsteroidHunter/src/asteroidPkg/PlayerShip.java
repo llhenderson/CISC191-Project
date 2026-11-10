@@ -4,25 +4,35 @@ import java.util.ArrayList;
 
 public class PlayerShip extends AsteroidHunterShip
 {
-	//private Player player;
+	private Player player;
 	private int x_position = 0;
 	private int y_position = 0;
-	private ArrayList<String> items;
 	
-	public PlayerShip(int initXPos, int initYPos)
+	public PlayerShip(Player initPlayer, int initXPos, int initYPos)
 	{
-		x_position = initXPos;
-		y_position = initYPos;
+		this.player = initPlayer;
+		this.x_position = initXPos;
+		this.y_position = initYPos;
+	}
+
+	public int getXPos()
+	{
+		return this.x_position;
+	}
+
+	public int getYPos()
+	{
+		return this.y_position;
 	}
 	
 	public void move(int x, int y)
 	{
-		x_position += x;
-		y_position += y;
+		this.x_position += x;
+		this.y_position += y;
 	}
 	
 	public void pickupItem(String gameItem)
 	{
-		items.add(gameItem);
+		player.storeItem(gameItem);
 	}
 }
