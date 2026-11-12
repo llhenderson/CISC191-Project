@@ -1,4 +1,4 @@
-package asteroidPkg;
+import java.util.ArrayList;
 
 public class EnemyShip extends AsteroidHunterShip
 {
@@ -6,7 +6,7 @@ public class EnemyShip extends AsteroidHunterShip
 	private int x_position = 0;
 	private int y_position = 0;
 	
-	public EnemyShip(ArrayList<EnemyCombatants> initEnemies, int initXPos, int initYPos)
+	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, int initXPos, int initYPos)
 	{
 		this.enemies = initEnemies;
 		this.x_position = initXPos;

@@ -1,5 +1,3 @@
-package asteroidPkg;
-
 import java.util.ArrayList;
 
 public class PlayerShip extends AsteroidHunterShip
