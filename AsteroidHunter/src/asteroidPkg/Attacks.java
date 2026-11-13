@@ -1,6 +1,6 @@
 public class Attacks {
-    String name;
-    int damage;
+    private String name;
+    private int damage;
     
     public Attacks(String name, int damage) {
         this.name = name;
