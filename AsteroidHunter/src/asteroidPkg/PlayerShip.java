@@ -2,8 +2,6 @@
 public class PlayerShip extends AsteroidHunterShip
 {
 	private Player player;
-	private int x_position = 0;
-	private int y_position = 0;
 	
 	public PlayerShip(Player initPlayer, int initXPos, int initYPos)
 	{

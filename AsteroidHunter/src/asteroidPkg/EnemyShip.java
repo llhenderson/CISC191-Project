@@ -3,8 +3,6 @@ import java.util.ArrayList;
 public class EnemyShip extends AsteroidHunterShip
 {
 	private ArrayList<EnemyCombatant> enemies;
-	private int x_position = 0;
-	private int y_position = 0;
 	
 	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, int initXPos, int initYPos)
 	{

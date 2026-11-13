@@ -1,8 +1,8 @@
 
 public abstract class AsteroidHunterShip 
 {
-	private int x_position = 0;
-	private int y_position = 0;
+	protected int x_position = 0;
+	protected int y_position = 0;
 	
 	public AsteroidHunterShip(int initXPos, int initYPos)
 	{
@@ -12,12 +12,12 @@ public abstract class AsteroidHunterShip
 
 	public abstract void move(int x, int y);
 
-	public int getXPos()
+	protected int getXPos()
 	{
 		return this.x_position;
 	}
 
-	public int getYPos()
+	protected int getYPos()
 	{
 		return this.y_position;
 	}
