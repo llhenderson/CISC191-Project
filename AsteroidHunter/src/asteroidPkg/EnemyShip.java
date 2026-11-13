@@ -5,7 +5,7 @@ public class EnemyShip extends AsteroidHunterShip
 	private ArrayList<EnemyCombatant> enemies;
 	private PlayerShip targetShip;
 	private final int startX = 200; // xPos of asteroid
-	private final int startY = 200; // xPos of asteroid
+	private final int startY = 200; // yPos of asteroid
 	
 	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, int initXPos, int initYPos, int initVelocityX, int initVelocityY, char initDirection)
 	{
@@ -20,8 +20,8 @@ public class EnemyShip extends AsteroidHunterShip
 	
 	public void move(int x, int y)
 	{
-		this.x_position += x;
-		this.y_position += y;
+		this.x_position += this.velocityX;
+		this.y_position += this.velocityY;
 	}
 
 	public void updateVelocity()
@@ -56,6 +56,14 @@ public class EnemyShip extends AsteroidHunterShip
 		{
 			this.direction = 'D';
 		}
+	}
+
+	public boolean playerEncounter()
+	{
+		return this.x_position < targetShip.x_position + targetShip.width &&
+			   this.x_position + this.width > targetShip.x_position &&
+			   this.y_position < targetShip.y_position + targetShip.height &&
+			   this.y_position + this.height > targetShip.y_position;
 	}
 
 	public void reset()

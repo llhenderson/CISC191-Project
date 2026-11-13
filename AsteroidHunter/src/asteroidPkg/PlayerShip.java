@@ -2,6 +2,7 @@
 public class PlayerShip extends AsteroidHunterShip
 {
 	private Player player;
+	private Asteroid asteroid;
 	private final int startX = 200;
 	private final int startY = 200;
 	
@@ -18,8 +19,8 @@ public class PlayerShip extends AsteroidHunterShip
 	
 	public void move(int x, int y)
 	{
-		this.x_position += x;
-		this.y_position += y;
+		this.x_position += this.velocityX;
+		this.y_position += this.velocityY;
 	}
 
 	public void updateVelocity()
@@ -54,7 +55,29 @@ public class PlayerShip extends AsteroidHunterShip
 		updateVelocity();
 		this.x_position += this.velocityX;
 		this.y_position += this.velocityY;
-		// Include collision condition
+		if (collision(this, asteroid))
+		{
+			this.x_position -= this.velocityX;
+			this.y_position -= this.velocityY;
+			this.direction = prevDirection;
+			updateVelocity();
+		}
+	}
+
+	public boolean enemyEncounter(EnemyShip enemy)
+	{
+		return this.x_position < enemy.x_position + enemy.width &&
+			   this.x_position + this.width > enemy.x_position &&
+			   this.y_position < enemy.y_position + enemy.height &&
+			   this.y_position + this.height > enemy.y_position;
+	}
+
+	public boolean collision(AsteroidHunterShip ship, Asteroid asteroid)
+	{
+		return this.x_position < asteroid.x_position + asteroid.width &&
+			   this.x_position + this.width > asteroid.x_position &&
+			   this.y_position < asteroid.y_position + asteroid.height;
+			   this.y_position + this.height > asteroid.y_position;
 	}
 
 	public void reset()

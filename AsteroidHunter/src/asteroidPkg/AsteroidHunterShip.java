@@ -28,11 +28,8 @@ public abstract class AsteroidHunterShip
 
 	public abstract void move(int x, int y);
 
-	// public abstract void updateDirection(char direction);
-
 	public abstract void updateVelocity();
 
 	public abstract void reset();
 
-	// public abstract boolean collision();
 }
