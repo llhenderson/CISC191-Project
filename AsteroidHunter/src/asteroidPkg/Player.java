@@ -14,4 +14,5 @@ public class Player extends Characters {
             items.put(gameItem, 1);
         }
     }
+    
 }
