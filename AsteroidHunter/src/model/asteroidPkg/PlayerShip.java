@@ -76,7 +76,7 @@ public class PlayerShip extends AsteroidHunterShip
 	{
 		return this.x_position < asteroid.x_position + asteroid.width &&
 			   this.x_position + this.width > asteroid.x_position &&
-			   this.y_position < asteroid.y_position + asteroid.height;
+			   this.y_position < asteroid.y_position + asteroid.height &&
 			   this.y_position + this.height > asteroid.y_position;
 	}
 
