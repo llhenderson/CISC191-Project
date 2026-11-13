@@ -38,8 +38,9 @@ public abstract class Characters {
     public HashMap<String, Integer> getStats() {
         return stats;
     }
-
+    //For computer controlled enemies, the decision of which attack to use will be handled by a min-max
+    //algorithm then the attack will be executed by this method.
     public void attack(Characters target, Attacks attack) {
-        
+        target.takeDamage(attack.getDamage());
     }
 }
