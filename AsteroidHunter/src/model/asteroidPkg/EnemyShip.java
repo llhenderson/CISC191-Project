@@ -1,15 +1,15 @@
 import java.util.ArrayList;
+import java.awt.Image;
 
 public class EnemyShip extends AsteroidHunterShip
 {
 	private ArrayList<EnemyCombatant> enemies;
-	private PlayerShip targetShip;
-	private final int startX = 200; // xPos of asteroid
-	private final int startY = 200; // yPos of asteroid
+	private int startX = 200; // xPos of asteroid
+	private int startY = 200; // yPos of asteroid
 	
-	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, int initXPos, int initYPos, int initVelocityX, int initVelocityY, char initDirection)
+	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, Image initImage, int initXPos, int initYPos, int initWidth, int initHeight)
 	{
-		super(initXPos, initYPos, initVelocityX, initVelocityY, initDirection);
+		super(initImage, initXPos, initYPos, initWidth, initHeight);
 		this.enemies = initEnemies;
 	}
 
@@ -24,7 +24,7 @@ public class EnemyShip extends AsteroidHunterShip
 		this.y_position += this.velocityY;
 	}
 
-	public void updateVelocity()
+	public void updateVelocity(PlayerShip targetShip, Asteroid asteroid)
 	{
 		// start at 0
 		// go at speed in which it will collide with PlayerShip
@@ -32,6 +32,7 @@ public class EnemyShip extends AsteroidHunterShip
 			// EnemyShip velocityY < 0
 		// else if PlayerShip yPos < EnemyShip yPos && PlayerShip xPos < EnemyShip xPos
 			// EnemyShip velocityY > 0
+		// INCLUDE ASTEROID & PLAYERSHIP DIMENSIONS
 		if (this.x_position - 50 < targetShip.x_position && targetShip.x_position < this.x_position && targetShip.y_position > this.y_position)
 		{
 			this.velocityY = -70;
@@ -44,21 +45,25 @@ public class EnemyShip extends AsteroidHunterShip
 
 	public void updateDirection()
 	{
-		if (velocityX == 0 && velocityY == 0)
+		if (velocityX > 0 && velocityY == 0)
 		{
 			this.direction = 'R';
 		}
-		else if (velocityY < 0)
+		else if (velocityX < 0 && velocityY == 0)
+		{
+			this.direction = 'L';
+		}
+		else if (velocityX == 0 && velocityY < 0)
 		{
 			this.direction = 'U';
 		}
-		else if (velocityY > 0)
+		else if (velocityX == 0 && velocityY > 0)
 		{
 			this.direction = 'D';
 		}
 	}
 
-	public boolean playerEncounter()
+	public boolean playerEncounter(PlayerShip targetShip)
 	{
 		return this.x_position < targetShip.x_position + targetShip.width &&
 			   this.x_position + this.width > targetShip.x_position &&
