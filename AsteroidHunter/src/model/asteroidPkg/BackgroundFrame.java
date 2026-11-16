@@ -10,7 +10,7 @@ public class BackgroundFrame extends JFrame {
     public BackgroundFrame() {
 	 
         setSize(boardWidth, boardHeight);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
 
         ImagePanel backgroundPanel = new ImagePanel("../resources/Space.png");
         backgroundPanel.setLayout(new BorderLayout());
@@ -20,16 +20,10 @@ public class BackgroundFrame extends JFrame {
 
         backgroundPanel.add(gamePanel, BorderLayout.CENTER);
         setContentPane(backgroundPanel);
-        //backgroundPanel.add(new Map(), BorderLayout.CENTER);
         setLocationRelativeTo(null);
     }
 
 }
-// Map pacmanGame = new Map();
-// 		frame.add(pacmanGame);
-// 		frame.pack();
-// 		pacmanGame.requestFocus();
-// 		frame.setVisible(true);
 class ImagePanel extends JPanel {
     private Image image;
 

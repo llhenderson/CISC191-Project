@@ -9,7 +9,6 @@ public class Block {
 		
 		int startX;
 		int startY;
-		char direction = 'U';
 		int velocityX =0;
 		int velocityY = 0;
 		
@@ -23,4 +22,6 @@ public class Block {
 			this.startY = y;
 
 		}
+
+        
 }
