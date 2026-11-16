@@ -1,14 +1,14 @@
+import java.awt.Image;
 
 public class PlayerShip extends AsteroidHunterShip
 {
 	private Player player;
-	private Asteroid asteroid;
 	private final int startX = 200;
 	private final int startY = 200;
 	
-	public PlayerShip(Player initPlayer, int initXPos, int initYPos, int initVelocityX, int initVelocityY, char initDirection)
+	public PlayerShip(Player initPlayer, Image initImage, int initXPos, int initYPos, int initWidth, int initHeight)
 	{
-		super(initXPos, initYPos, initVelocityX, initVelocityY, initDirection);
+		super(initImage, initXPos, initYPos, initWidth, initHeight);
 		this.player = initPlayer;
 	}
 
@@ -47,7 +47,7 @@ public class PlayerShip extends AsteroidHunterShip
 		}
 	}
 
-	public void updateDirection(char direction)
+	public void updateDirection(char direction, Asteroid asteroid)
 	{
 		char prevDirection = this.direction;
 
