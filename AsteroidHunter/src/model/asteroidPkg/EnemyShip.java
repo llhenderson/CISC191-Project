@@ -4,6 +4,7 @@ import java.awt.Image;
 public class EnemyShip extends AsteroidHunterShip
 {
 	private ArrayList<EnemyCombatant> enemies;
+	private final int STRAIGHT_COST = 1;
 	private int startX = 200; // xPos of asteroid
 	private int startY = 200; // yPos of asteroid
 	
@@ -24,23 +25,15 @@ public class EnemyShip extends AsteroidHunterShip
 		this.y_position += this.velocityY;
 	}
 
-	public void updateVelocity(PlayerShip targetShip, Asteroid asteroid)
+	public void chasePlayerShip(PlayerShip targetShip, Asteroid asteroid)
 	{
-		// start at 0
-		// go at speed in which it will collide with PlayerShip
-		// if PlayerShip yPos > EnemyShip yPos && PlayerShip xPos < EnemyShip xPos
-			// EnemyShip velocityY < 0
-		// else if PlayerShip yPos < EnemyShip yPos && PlayerShip xPos < EnemyShip xPos
-			// EnemyShip velocityY > 0
-		// INCLUDE ASTEROID & PLAYERSHIP DIMENSIONS
-		if (this.x_position - 50 < targetShip.x_position && targetShip.x_position < this.x_position && targetShip.y_position > this.y_position)
+		// Path finding algorithm
+		// Chasing playerShip
+		if (playerEncounter(targetShip))
 		{
-			this.velocityY = -70;
+			return;
 		}
-		else if (this.x_position - 50 < targetShip.x_position && targetShip.x_position < this.x_position && targetShip.y_position < this.y_position)
-		{
-			this.velocityY = 70;
-		}
+		
 	}
 
 	public void updateDirection()
@@ -61,6 +54,14 @@ public class EnemyShip extends AsteroidHunterShip
 		{
 			this.direction = 'D';
 		}
+	}
+
+	public boolean collision(Block a, Asteroid asteroid)
+	{
+		return a.x < asteroid.x_position + asteroid.width &&
+			   a.x + a.width > asteroid.x_position &&
+			   a.y < asteroid.y_position + asteroid.height &&
+			   a.y + a.height > asteroid.y_position;
 	}
 
 	public boolean playerEncounter(PlayerShip targetShip)

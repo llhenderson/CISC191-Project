@@ -72,12 +72,12 @@ public class PlayerShip extends AsteroidHunterShip
 			   this.y_position + this.height > enemy.y_position;
 	}
 
-	public boolean collision(AsteroidHunterShip ship, Asteroid asteroid)
+	public boolean collision(Block a, Asteroid asteroid)
 	{
-		return this.x_position < asteroid.x_position + asteroid.width &&
-			   this.x_position + this.width > asteroid.x_position &&
-			   this.y_position < asteroid.y_position + asteroid.height &&
-			   this.y_position + this.height > asteroid.y_position;
+		return a.x < asteroid.x_position + asteroid.width &&
+			   a.x + a.width > asteroid.x_position &&
+			   a.y < asteroid.y_position + asteroid.height &&
+			   a.y + a.height > asteroid.y_position;
 	}
 
 	public void reset()
