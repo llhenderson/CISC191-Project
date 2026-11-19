@@ -227,10 +227,10 @@ public class Astar
             int fNew;
 
             // Directions corresponding to the 8 neighbors
-            int[] dRow = { -1, 1, 0, 0, -1, -1, 1, 1 };
-            int[] dCol = { 0, 0, 1, -1, 1, -1, 1, -1 };
+            int[] dRow = { -1, 1, 0, 0 };
+            int[] dCol = { 0, 0, 1, -1 };
 
-            for (int dir = 0; dir < 8; dir++)
+            for (int dir = 0; dir < 4; dir++)
             {
                 int newRow = i + dRow[dir];
                 int newCol = j + dCol[dir];
@@ -304,7 +304,7 @@ public class Astar
         };
         
         // Source is left-most bottom-most corner
-        Pair source = new Pair(8, 0);
+        Pair source = new Pair(5, 0);
 
         Pair target = new Pair(0, 0);
 
