@@ -1,10 +1,10 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.awt.Image;
 
 public class EnemyShip extends AsteroidHunterShip
 {
 	private ArrayList<EnemyCombatant> enemies;
-	private final int STRAIGHT_COST = 1;
 	private int startX = 200; // xPos of asteroid
 	private int startY = 200; // yPos of asteroid
 	
@@ -25,15 +25,18 @@ public class EnemyShip extends AsteroidHunterShip
 		this.y_position += this.velocityY;
 	}
 
-	public void chasePlayerShip(PlayerShip targetShip, Asteroid asteroid)
+
+	public int shortestPathToPlayerShip(PlayerShip targetShip, Asteroid asteroid, int map[][], int numAsteroids)
 	{
 		// Path finding algorithm
 		// Chasing playerShip
-		if (playerEncounter(targetShip))
-		{
-			return;
-		}
 		
+		
+
+		// if (playerEncounter(targetShip))
+		// {
+		// 	return;
+		// }
 	}
 
 	public void updateDirection()
