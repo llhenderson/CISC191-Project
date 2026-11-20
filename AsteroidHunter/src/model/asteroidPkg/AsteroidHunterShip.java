@@ -43,7 +43,7 @@ public abstract class AsteroidHunterShip extends Block
 		return this.direction;
 	}
 
-	public abstract void move(int x, int y);
+	public abstract void move();
 
 	public abstract void reset();
 

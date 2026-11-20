@@ -99,7 +99,7 @@ public class Astar
     }
 
     // Method to trace the path from source to target
-    static void tracePath(Cell[][] cellDetails, Pair target)
+    static char tracePath(Cell[][] cellDetails, Pair target)
     {
         // System.out.println("The Path is ");
 
@@ -118,36 +118,50 @@ public class Astar
 
             row = tempRow;
             col = tempCol;
-
         }
 
         path.push(new Pair(row, col));
 
-        while (!path.isEmpty())
-        {
-            Pair p = path.pop();
-            System.out.print("-> (" + p.first + ", " + p.second + ") ");
-        }
+        Pair p1 = path.pop();
+        Pair p2 = path.pop();
 
-        System.out.println();
+        // System.out.print("-> (" + p1.first + ", " + p1.second + ") ");
+        // System.out.print("-> (" + p2.first + ", " + p2.second + ") ");
+        // System.out.println();
+
+        if (p1.first - p2.first == 1 && p1.second - p2.second == 0)
+        {
+            return 'U';
+        }
+        else if (p1.first - p2.first == -1 && p1.second - p2.second == 0)
+        {
+            return 'D';
+        }
+        else if (p1.first - p2.first == 0 && p1.second - p2.second == 1)
+        {
+            return 'L';
+        }
+        else if (p1.first - p2.first == 0 && p1.second - p2.second == -1)
+        {
+            return 'R';
+        }
+        return 'X';
     }
 
     // Method to find shortest path between source and target cell
     // using A* algorithm
-    static void aStarAlgo(int[][] grid, Pair source, Pair target)
+    static char aStarAlgo(int[][] grid, Pair source, Pair target)
     {
         // If source is out of range
         if (!isValid(source.first, source.second))
         {
-            System.out.println("Source is invalid"); //
-            return;
+            return 'X';
         }
 
         // If target is out of range
         if (!isValid(target.first, target.second))
         {
-            System.out.println("Target is invalid"); //
-            return;
+            return 'X';
         }
 
         // Either source or target is blocked
@@ -155,14 +169,14 @@ public class Astar
             !isUnBlocked(grid, target.first, target.second))
         {
             System.out.println("Source or target is blocked"); //
-            return;
+            return 'X';
         }
 
         // If target cell is same as source cell
         if (atTarget(source.first, source.second, target))
         {
             System.out.println("We're at target"); // Replace with enemy saying "Target acquired"
-            return;
+            return 'X';
         }
 
         // Create closed list & initialize it to false, meaning no
@@ -203,6 +217,8 @@ public class Astar
         // Initialize boolean as false since target is not reached
         boolean foundTarget = false;
 
+        char direction = 'N';
+
         while (!openList.isEmpty())
         {
             Node p = openList.poll();
@@ -219,14 +235,14 @@ public class Astar
             closedList[i][j] = true;
 
             /**
-             * Generate all 8 successors of this cell
+             * Generate all 4 successors of this cell
              */
             // Store the "g", "h", and "f" values of successors
             int gNew;
             int hNew;
             int fNew;
 
-            // Directions corresponding to the 8 neighbors
+            // Directions corresponding to the 4 neighbors
             int[] dRow = { -1, 1, 0, 0 };
             int[] dCol = { 0, 0, 1, -1 };
 
@@ -247,10 +263,26 @@ public class Astar
 
                         System.out.println("The target cell is found"); //
 
-                        tracePath(cellDetails, target);
+                        direction = tracePath(cellDetails, target);
 
                         foundTarget = true;
-                        return;
+
+                        if (direction == 'U')
+                        {
+                            return 'U';
+                        }
+                        else if (direction == 'D')
+                        {
+                            return 'D';
+                        }
+                        else if (direction == 'L')
+                        {
+                            return 'L';
+                        }
+                        else if (direction == 'R')
+                        {
+                            return 'R';
+                        }
                     }
                     // Perform following if successor unblocked or not on closed list
                     else if (!closedList[newRow][newCol] && isUnBlocked(grid, newRow, newCol))
@@ -258,7 +290,7 @@ public class Astar
                         // Add diagonal movement if PlayerShip can move diagonally
                         // if (Math.abs(dRow[dir]) + Math.abs(dCol[dir]) == 2)
                         // then gNew = cellDetails[i][j].g + 1.414, else add gNew here
-                        
+
                         gNew = cellDetails[i][j].g + 1;
 
                         hNew = calculateHValue(newRow, newCol, target);
@@ -281,14 +313,8 @@ public class Astar
                 }
             }
         }
-
-        // Output message when target cell not found
-        if (!foundTarget)
-        {
-            System.out.println("Failed to find target");
-        }
+        return 'X';
     }
-
     public static void main(String[] args)
     {
         int[][] grid = {
@@ -304,7 +330,7 @@ public class Astar
         };
         
         // Source is left-most bottom-most corner
-        Pair source = new Pair(5, 0);
+        Pair source = new Pair(8, 0);
 
         Pair target = new Pair(0, 0);
 

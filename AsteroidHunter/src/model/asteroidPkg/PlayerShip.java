@@ -17,7 +17,7 @@ public class PlayerShip extends AsteroidHunterShip
 		return this.player;
 	}
 	
-	public void move(int x, int y)
+	public void move()
 	{
 		this.x_position += this.velocityX;
 		this.y_position += this.velocityY;
@@ -89,5 +89,13 @@ public class PlayerShip extends AsteroidHunterShip
 	public void pickupItem(String gameItem)
 	{
 		player.pickupItem(gameItem);
+	}
+
+	public boolean isDefeated(Player target)
+	{
+		reset();
+		// resetMap() method?
+		// Reduce damage on playerShip?
+		return false;
 	}
 }

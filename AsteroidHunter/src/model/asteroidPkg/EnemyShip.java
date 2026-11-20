@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.awt.Image;
 
 public class EnemyShip extends AsteroidHunterShip
@@ -7,6 +6,7 @@ public class EnemyShip extends AsteroidHunterShip
 	private ArrayList<EnemyCombatant> enemies;
 	private int startX = 200; // xPos of asteroid
 	private int startY = 200; // yPos of asteroid
+	private final int tileSize = 32;
 	
 	public EnemyShip(ArrayList<EnemyCombatant> initEnemies, Image initImage, int initXPos, int initYPos, int initWidth, int initHeight)
 	{
@@ -19,52 +19,46 @@ public class EnemyShip extends AsteroidHunterShip
 		return this.enemies;
 	}
 	
-	public void move(int x, int y)
+	public void move()
 	{
 		this.x_position += this.velocityX;
 		this.y_position += this.velocityY;
 	}
 
-
-	public int shortestPathToPlayerShip(PlayerShip targetShip, Asteroid asteroid, int map[][], int numAsteroids)
+	public void updateVelocity()
 	{
-		// Path finding algorithm
-		// Chasing playerShip
-		
-		
-
-		// if (playerEncounter(targetShip))
-		// {
-		// 	return;
-		// }
-	}
-
-	public void updateDirection()
-	{
-		if (velocityX > 0 && velocityY == 0)
+		if (this.direction == 'U')
 		{
-			this.direction = 'R';
+			this.velocityX = 0;
+			this.velocityY = -tileSize / 3; 
 		}
-		else if (velocityX < 0 && velocityY == 0)
+		else if (this.direction == 'D')
 		{
-			this.direction = 'L';
+			this.velocityX = 0;
+			this.velocityY = tileSize / 3; 
 		}
-		else if (velocityX == 0 && velocityY < 0)
+		else if (this.direction == 'L')
 		{
-			this.direction = 'U';
+			this.velocityX = -tileSize / 3; 
+			this.velocityY = 0;
 		}
-		else if (velocityX == 0 && velocityY > 0)
+		else if (this.direction == 'R')
 		{
-			this.direction = 'D';
+			this.velocityX = tileSize / 3; 
+			this.velocityY = 0;
+		}
+		else
+		{
+			this.velocityX = 0;
+			this.velocityY = 0;
 		}
 	}
 
-	public boolean collision(Block a, Asteroid asteroid)
+	public void updateDirection(char direction)
 	{
-		return a.x < asteroid.x_position + asteroid.width &&
-			   a.x + a.width > asteroid.x_position &&
-			   a.y < asteroid.y_position + asteroid.height &&
-			   a.y + a.height > asteroid.y_position;
+		this.direction = direction;
+		updateVelocity();
+		move();
 	}
 
 	public boolean playerEncounter(PlayerShip targetShip)
@@ -79,5 +73,31 @@ public class EnemyShip extends AsteroidHunterShip
 	{
 		this.x_position = startX;
 		this.y_position = startY;
+	}
+
+	public void chasePlayerShip(int map[][], PlayerShip targetShip)
+	{
+		while (!playerEncounter(targetShip) || Math.abs(targetShip.x_position - this.x_position) < 7 && Math.abs(targetShip.y_position - this.y_position) < 7)
+		{
+			Astar.Pair enemyPair = new Astar.Pair(this.x_position, this.y_position);
+			Astar.Pair targetPair = new Astar.Pair(targetShip.x_position, targetShip.y_position);
+		
+			// Return current direction of EnemyShip
+			char currentDir = Astar.aStarAlgo(map, enemyPair, targetPair);
+			
+			updateDirection(currentDir);
+		}
+		if (playerEncounter(targetShip))
+		{
+			// initiate battle
+		}
+	}
+
+	public boolean isDefeated(Player target)
+	{
+		reset();
+		// Make enemyShip image disappear from screen
+		// Make enemyShip explode and leave debris or make it explode and fade away
+		return false;
 	}
 }
