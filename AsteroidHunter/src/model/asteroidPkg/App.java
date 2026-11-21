@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
 public class App {
 
 	public static void main(String[] args) {
@@ -17,7 +16,7 @@ public class App {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SwingUtilities.invokeLater(() -> {
-            new BackgroundFrame().setVisible(true);
+            new BackgroundFrame("../resources/Battle_Image2.png",true, new Player()).setVisible(true);            
         });
 
 

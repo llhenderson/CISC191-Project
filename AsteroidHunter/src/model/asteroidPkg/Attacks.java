@@ -9,4 +9,7 @@ public class Attacks {
     public int getDamage() {
         return damage;
     }
+    public String getName() {
+        return name;
+    }
 }

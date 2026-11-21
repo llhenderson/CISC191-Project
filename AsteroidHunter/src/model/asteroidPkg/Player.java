@@ -3,7 +3,10 @@ import java.util.HashMap;
 
 public class Player extends Characters {
     private HashMap<String, Integer> items;
+    public Player() {
 
+        super();
+    }
     public Player(String name, Attacks[] moveset, HashMap<String, Integer> stats, HashMap<String, Integer> items) {
         super(name,moveset,new HashMap<String, Integer>(){
             {
@@ -22,4 +25,5 @@ public class Player extends Characters {
             items.put(gameItem, 1);
         }
     }
+    
 }
