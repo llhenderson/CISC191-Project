@@ -7,12 +7,12 @@ public class Player extends Characters {
 
         super();
     }
-    public Player(String name, Attacks[] moveset, HashMap<String, Integer> stats, HashMap<String, Integer> items) {
-        super(name,moveset,new HashMap<String, Integer>(){
+    public Player(String name, Attacks[] moveset, HashMap<String, Double> stats, HashMap<String, Integer> items) {
+        super(name,moveset,new HashMap<String, Double>(){
             {
-                put("Health", 100);
-                put("Power", 10);
-                put("Defense", 5);
+                put("Health", 100.0);
+                put("Power", 10.0);
+                put("Defense", 5.0);
             }
         });
         this.items = items;
