@@ -1,14 +1,18 @@
 import java.awt.Image;
+import java.util.HashMap;
 
 public class PlayerShip extends AsteroidHunterShip
 {
 	private Player player;
-	private final int startX = 200;
-	private final int startY = 200;
+	private HashMap<String, Integer> health;
+	private final int tileSize = 32;
+	private int startX = 10 * tileSize;
+	private int startY = 3 * tileSize;
 	
 	public PlayerShip(Player initPlayer, Image initImage, int initXPos, int initYPos, int initWidth, int initHeight)
 	{
 		super(initImage, initXPos, initYPos, initWidth, initHeight);
+		health.put("Health", 100);
 		this.player = initPlayer;
 	}
 
@@ -28,26 +32,26 @@ public class PlayerShip extends AsteroidHunterShip
 		if (this.direction == 'U')
 		{
 			this.velocityX = 0;
-			this.velocityY = -50; // FIXME
+			this.velocityY = -tileSize / 4;
 		}
 		else if (this.direction == 'D')
 		{
 			this.velocityX = 0;
-			this.velocityY = 50; // FIXME
+			this.velocityY = tileSize / 4; 
 		}
 		else if (this.direction == 'L')
 		{
-			this.velocityX = -50; // FIXME
+			this.velocityX = -tileSize / 4;
 			this.velocityY = 0;
 		}
 		else if (this.direction == 'R')
 		{
-			this.velocityX = 50; // FIXME
+			this.velocityX = tileSize / 4;
 			this.velocityY = 0;
 		}
 	}
 
-	public void updateDirection(char direction, Asteroid asteroid)
+	public void updateDirection(char direction, Asteroid asteroid, EnemyShip enemy)
 	{
 		char prevDirection = this.direction;
 
@@ -57,10 +61,27 @@ public class PlayerShip extends AsteroidHunterShip
 		this.y_position += this.velocityY;
 		if (collision(this, asteroid))
 		{
+			// Update health of PlayerShip
+			int currentHealth = health.get("Health");
+			int newHealth = currentHealth - 20;
+			health.put("Health", newHealth);
+
+			// Cease PlayerShip movements
 			this.x_position -= this.velocityX;
 			this.y_position -= this.velocityY;
 			this.direction = prevDirection;
 			updateVelocity();
+		}
+		if (enemyEncounter(enemy))
+		{
+			// initiate battle
+			if (player.isDefeated())
+			{
+				// Update health of PlayerShip
+				int currentHealth = health.get("Health");
+				int newHealth = currentHealth - 10;
+				health.put("Health", newHealth);
+			}
 		}
 	}
 
@@ -74,10 +95,10 @@ public class PlayerShip extends AsteroidHunterShip
 
 	public boolean collision(Block a, Asteroid asteroid)
 	{
-		return a.x < asteroid.x_position + asteroid.width &&
-			   a.x + a.width > asteroid.x_position &&
-			   a.y < asteroid.y_position + asteroid.height &&
-			   a.y + a.height > asteroid.y_position;
+		return a.x < asteroid.x + asteroid.width &&
+			   a.x + a.width > asteroid.x &&
+			   a.y < asteroid.y + asteroid.height &&
+			   a.y + a.height > asteroid.y;
 	}
 
 	public void reset()
@@ -89,13 +110,5 @@ public class PlayerShip extends AsteroidHunterShip
 	public void pickupItem(String gameItem)
 	{
 		player.pickupItem(gameItem);
-	}
-
-	public boolean isDefeated(Player target)
-	{
-		reset();
-		// resetMap() method?
-		// Reduce damage on playerShip?
-		return false;
 	}
 }
