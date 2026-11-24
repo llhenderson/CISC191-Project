@@ -17,8 +17,8 @@ public class App {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SwingUtilities.invokeLater(() -> {
 			// Used to test certain panels
-			new Battle(new Player(),new EnemyCombatant()).setVisible(true);
-            //new BackgroundFrame("../resources/Battle.png",true, new Player()).setVisible(true);            
+			//new Battle(new Player(),new EnemyCombatant()).setVisible(true);
+            new BackgroundFrame("../resources/Battle.png",true, new Player()).setVisible(true);            
         });
 
 

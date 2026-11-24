@@ -28,7 +28,7 @@ public class Player extends Characters {
 
     public boolean isDefeated()
     {
-        HashMap<String, Integer> currentStats = this.getStats();
+        HashMap<String, Double> currentStats = this.getStats();
         if (currentStats.get("Health") == 0)
         {
             return true;

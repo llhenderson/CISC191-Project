@@ -334,6 +334,8 @@ public class Astar
 
         Pair target = new Pair(0, 0);
 
-        aStarAlgo(grid, source, target);
+        char dir = aStarAlgo(grid, source, target);
+
+        System.out.println(dir);
     }
 }
