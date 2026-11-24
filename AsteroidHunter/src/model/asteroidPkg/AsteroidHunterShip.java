@@ -46,5 +46,4 @@ public abstract class AsteroidHunterShip extends Block
 	public abstract void move();
 
 	public abstract void reset();
-
 }

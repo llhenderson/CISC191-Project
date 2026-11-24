@@ -25,5 +25,14 @@ public class Player extends Characters {
             items.put(gameItem, 1);
         }
     }
-    
+
+    public boolean isDefeated()
+    {
+        HashMap<String, Double> currentStats = this.getStats();
+        if (currentStats.get("Health") == 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }
