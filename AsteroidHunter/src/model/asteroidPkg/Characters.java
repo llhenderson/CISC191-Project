@@ -46,6 +46,7 @@ public abstract class Characters {
     //For computer controlled enemies, the decision of which attack to use will be handled by a min-max
     //algorithm then the attack will be executed by this method.
     public void attack(Characters target, Attacks attack) {
+        System.out.println(target+" is attacked with " + attack.getName());
         target.takeDamage(attack.getDamage());
         if(target instanceof EnemyCombatant enemy) {
             enemy.knownHumanMoves.add(attack);

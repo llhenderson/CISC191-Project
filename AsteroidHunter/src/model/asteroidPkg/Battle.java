@@ -40,7 +40,7 @@ public class Battle extends JFrame{
         playerName.setFont(new Font("Arial",Font.BOLD,24));
         playerName.setForeground(Color.WHITE);
         JProgressBar playerHP = new JProgressBar(0,100);
-        playerHP.setValue(player.stats.get("Health").intValue());
+        playerHP.setValue(100);
         playerHP.setStringPainted(true);
         JPanel playerHPPanel = new JPanel(new BorderLayout());
         playerHPPanel.setOpaque(false);
