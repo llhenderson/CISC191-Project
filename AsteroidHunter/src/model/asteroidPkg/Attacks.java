@@ -1,12 +1,15 @@
 public class Attacks {
     private String name;
-    private int damage;
+    private double damage;
     
-    public Attacks(String name, int damage) {
+    public Attacks(String name, double damage) {
         this.name = name;
         this.damage = damage;
     }
-    public int getDamage() {
+    public double getDamage() {
         return damage;
+    }
+    public String getName() {
+        return name;
     }
 }
